@@ -156,7 +156,9 @@ function CodeView() {
 
     Object.entries(files).forEach(([name, content]) => {
       if (!content?.code) return;
-      zip.file(name.replace("/", ""), content.code);
+
+      const cleanName = name.startsWith("/") ? name.slice(1) : name;
+      zip.file(cleanName, content.code);
     });
 
     const blob = await zip.generateAsync({ type: "blob" });
@@ -203,17 +205,18 @@ function CodeView() {
       </div>
 
       <SandpackProvider
-        template="react"
-        files={{ ...BASE_SANDBOX, ...files }}
-        theme="dark"
-        customSetup={{
-          dependencies: { ...Lookup.DEPENDANCY },
-          entry: "/src/index.js",
-        }}
-        options={{
-          externalResources: ["https://cdn.tailwindcss.com"],
-        }}
-      >
+  template="react"
+  files={{ ...BASE_SANDBOX, ...files }}
+  theme="dark"
+  customSetup={{
+    dependencies: { ...Lookup.DEPENDANCY },
+    entry: "/src/index.js",
+  }}
+  options={{
+    externalResources: ["https://cdn.tailwindcss.com"],
+    bundlerTimeout: 30000, // ✅ ADD THIS
+  }}
+>
         <SandpackLayout>
 
           {activeTab === "code" ? (

@@ -23,7 +23,6 @@ function Hero() {
   const onGenerate = async (input) => {
     if (!input || input.trim().length < 5) return;
 
-    // 🧠 thinking
     updateMood("focused");
 
     const msg = {
@@ -33,7 +32,6 @@ function Hero() {
 
     setMessages(msg);
 
-    // 🔨 building
     setTimeout(() => {
       updateMood("busy");
     }, 800);
@@ -42,7 +40,6 @@ function Hero() {
       messages: [msg],
     });
 
-    // 🎉 done
     setTimeout(() => {
       updateMood("proud");
     }, 1200);
@@ -110,8 +107,8 @@ function Hero() {
 
   return (
     <div className="min-h-screen bg-gray-950 relative overflow-hidden">
-      
-      {/* Background */}
+
+      {/* Background (UNCHANGED) */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]">
         <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 bg-[radial-gradient(circle_400px_at_50%_300px,#3b82f625,transparent)]" />
       </div>
@@ -121,7 +118,7 @@ function Hero() {
 
           {/* Header */}
           <div className="text-center space-y-5">
-            <div className="inline-flex items-center space-x-2 bg-blue-500/10 rounded-full px-6 py-3 border border-blue-500/30">
+            <div className="inline-flex items-center space-x-2 bg-blue-500/10 backdrop-blur-md rounded-full px-6 py-3 border border-blue-400/20 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
               <Sparkles className="h-6 w-6 text-blue-400" />
               <span className="text-blue-400 text-lg font-semibold">
                 NEXT-GEN AI WEBSITE BUILDER
@@ -137,8 +134,9 @@ function Hero() {
             </p>
           </div>
 
-          {/* Input */}
-          <div className="w-full max-w-3xl bg-gray-900/50 backdrop-blur-xl rounded-xl border border-blue-500/30 shadow-[0_0_40px_rgba(59,130,246,0.15)]">
+          {/* 🔥 GLASS INPUT */}
+          <div className="w-full max-w-3xl bg-white/5 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_60px_rgba(59,130,246,0.25)] transition">
+
             <div className="p-6">
               <div className="flex gap-4">
 
@@ -150,7 +148,7 @@ function Hero() {
                     updateMood("curious");
                   }}
                   disabled={isEnhancing}
-                  className="w-full bg-transparent border border-blue-500/30 rounded-lg p-5 text-gray-100 placeholder-gray-400 focus:border-blue-500 outline-none font-mono text-lg h-40 resize-none"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl p-5 text-gray-100 placeholder-gray-400 focus:border-blue-400 outline-none font-mono text-lg h-40 resize-none backdrop-blur-md"
                 />
 
                 <div className="flex flex-col gap-3">
@@ -158,7 +156,7 @@ function Hero() {
                     <>
                       <button
                         onClick={enhancePrompt}
-                        className="bg-gradient-to-r from-emerald-500 to-teal-500 p-4 rounded-xl hover:scale-105 transition"
+                        className="bg-gradient-to-r from-emerald-500 to-teal-500 p-4 rounded-xl hover:scale-105 transition shadow-lg"
                       >
                         {isEnhancing ? (
                           <Loader2 className="animate-spin" />
@@ -169,7 +167,7 @@ function Hero() {
 
                       <button
                         onClick={() => onGenerate(userInput)}
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-xl hover:scale-105 transition"
+                        className="bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-xl hover:scale-105 transition shadow-lg"
                       >
                         <Send />
                       </button>
@@ -181,22 +179,24 @@ function Hero() {
             </div>
           </div>
 
-          {/* Suggestions */}
+          {/* 🔥 GLASS SUGGESTIONS */}
           <div className="w-full max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
               {Lookup?.SUGGSTIONS?.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => onSuggestionClick(suggestion)}
-                  className="p-5 bg-gray-900/50 border border-blue-500/20 rounded-xl text-left hover:bg-gray-800/60 transition"
+                  className="p-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl text-left hover:bg-white/10 hover:scale-[1.02] transition shadow-[0_0_20px_rgba(0,0,0,0.3)]"
                 >
                   {suggestion}
                 </button>
               ))}
+
             </div>
           </div>
 
-          {/* 🚀 Carousel */}
+          {/* Carousel */}
           <div className="mt-2 w-full flex flex-col items-center">
 
             <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 text-center">
