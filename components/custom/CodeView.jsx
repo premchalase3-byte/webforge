@@ -8,7 +8,7 @@ import Prompt from "@/data/Prompt";
 import { useConvex, useMutation } from "convex/react";
 import { useParams } from "next/navigation";
 import { api } from "@/convex/_generated/api";
-import { Loader2Icon, Download } from "lucide-react";
+import { Loader2Icon, Download, Monitor, Smartphone } from "lucide-react";
 import JSZip from "jszip";
 import { BASE_SANDBOX } from "@/data/BaseSandbox";
 import { useBot } from "@/components/mascot/BotContext";
@@ -48,16 +48,15 @@ function CodeView() {
   const bot = useBot();
 
   const [activeTab, setActiveTab] = useState("code");
+  const [previewMode, setPreviewMode] = useState("desktop"); // ✅ NEW
   const [files, setFiles] = useState({});
   const [loading, setLoading] = useState(false);
 
-  /* Safe bot handler */
   const setBot = (state) => {
     if (bot?.updateMood) bot.updateMood(state);
     else if (bot?.setBotState) bot.setBotState(state);
   };
 
-  /* Normalize AI files */
   const preprocessFiles = useCallback((files) => {
     const processed = {};
 
@@ -79,7 +78,6 @@ function CodeView() {
     return processed;
   }, []);
 
-  /* Ensure required files */
   const ensureBaseFiles = (files) => {
     const newFiles = { ...files };
 
@@ -91,7 +89,6 @@ function CodeView() {
     return newFiles;
   };
 
-  /* Load workspace */
   const GetFiles = useCallback(async () => {
     const result = await convex.query(api.workspace.GetWorkspace, {
       workspaceId: id,
@@ -105,7 +102,6 @@ function CodeView() {
     if (id) GetFiles();
   }, [id, GetFiles]);
 
-  /* Generate AI code */
   const GenerateAiCode = useCallback(async () => {
     setLoading(true);
     setBot("busy");
@@ -150,7 +146,6 @@ function CodeView() {
     }
   }, [messages, GenerateAiCode]);
 
-  /* Download */
   const downloadFiles = async () => {
     const zip = new JSZip();
 
@@ -179,6 +174,7 @@ function CodeView() {
       {/* Top Bar */}
       <div className="bg-[#181818] p-3 flex justify-between items-center border-b">
 
+        {/* LEFT */}
         <div className="flex gap-3 bg-black p-1 rounded-full">
           <button
             onClick={() => setActiveTab("code")}
@@ -195,6 +191,30 @@ function CodeView() {
           </button>
         </div>
 
+        {/* CENTER (NEW) */}
+        {activeTab === "preview" && (
+          <div className="flex gap-2 bg-black p-1 rounded-full">
+            <button
+              onClick={() => setPreviewMode("desktop")}
+              className={`p-2 rounded-full ${
+                previewMode === "desktop" ? "bg-blue-500/30 text-blue-400" : ""
+              }`}
+            >
+              <Monitor size={16} />
+            </button>
+
+            <button
+              onClick={() => setPreviewMode("mobile")}
+              className={`p-2 rounded-full ${
+                previewMode === "mobile" ? "bg-blue-500/30 text-blue-400" : ""
+              }`}
+            >
+              <Smartphone size={16} />
+            </button>
+          </div>
+        )}
+
+        {/* RIGHT */}
         <button
           onClick={downloadFiles}
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full flex items-center gap-2"
@@ -205,18 +225,18 @@ function CodeView() {
       </div>
 
       <SandpackProvider
-  template="react"
-  files={{ ...BASE_SANDBOX, ...files }}
-  theme="dark"
-  customSetup={{
-    dependencies: { ...Lookup.DEPENDANCY },
-    entry: "/src/index.js",
-  }}
-  options={{
-    externalResources: ["https://cdn.tailwindcss.com"],
-    bundlerTimeout: 30000, // ✅ ADD THIS
-  }}
->
+        template="react"
+        files={{ ...BASE_SANDBOX, ...files }}
+        theme="dark"
+        customSetup={{
+          dependencies: { ...Lookup.DEPENDANCY },
+          entry: "/src/index.js",
+        }}
+        options={{
+          externalResources: ["https://cdn.tailwindcss.com"],
+          bundlerTimeout: 30000,
+        }}
+      >
         <SandpackLayout>
 
           {activeTab === "code" ? (
@@ -225,7 +245,17 @@ function CodeView() {
               <SandpackCodeEditor style={{ height: "80vh" }} />
             </>
           ) : (
-            <SandpackPreview style={{ height: "80vh" }} />
+            <div className="flex justify-center w-full">
+              <div
+                className={`transition-all duration-300 ${
+                  previewMode === "mobile"
+                    ? "w-[375px] border rounded-xl overflow-hidden shadow-lg"
+                    : "w-full"
+                }`}
+              >
+                <SandpackPreview style={{ height: "80vh" }} />
+              </div>
+            </div>
           )}
 
         </SandpackLayout>
