@@ -5,6 +5,8 @@ import WebForgeBot from "@/components/mascot/WebForgeBot";
 import { MessagesContextProvider } from "@/context/MessagesContext";
 import { BotProvider } from "@/components/mascot/BotContext";
 
+import { ClerkProvider } from "@clerk/nextjs";
+
 export const metadata = {
   title: "WebForge",
   description: "AI Website Builder",
@@ -12,24 +14,26 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body>
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body>
 
-        <ConvexClientProvider>
-          <Provider>
-            <MessagesContextProvider>
-              <BotProvider>
+          <ConvexClientProvider>
+            <Provider>
+              <MessagesContextProvider>
+                <BotProvider>
 
-                {children}
+                  {children}
 
-                <WebForgeBot />
+                  <WebForgeBot />
 
-              </BotProvider>
-            </MessagesContextProvider>
-          </Provider>
-        </ConvexClientProvider>
+                </BotProvider>
+              </MessagesContextProvider>
+            </Provider>
+          </ConvexClientProvider>
 
-      </body>
-    </html>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
