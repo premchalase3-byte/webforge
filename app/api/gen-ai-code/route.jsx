@@ -1,27 +1,65 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import Groq from "groq-sdk";
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+});
 
 export async function POST(req) {
   try {
     const { prompt } = await req.json();
 
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-    });
-
-    let result;
+    let completion;
 
     try {
-      result = await model.generateContent(prompt);
+      completion = await groq.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        temperature: 0.7,
+        max_tokens: 4096,
+        messages: [
+          {
+            role: "system",
+            content: `
+You are an AI website generator.
+
+Return ONLY valid JSON.
+
+Format:
+{
+  "files": {
+    "/src/App.js": {
+      "code": "React code here"
+    }
+  }
+}
+
+Rules:
+- Use React functional components
+- Use inline styles OR Tailwind classes
+- No markdown
+- No explanations
+- Return pure JSON only
+            `,
+          },
+          {
+            role: "user",
+            content: prompt,
+          },
+        ],
+      });
     } catch (err) {
-      console.log("AI failed → using fallback");
+      console.log("GROQ ERROR:", err);
     }
 
     let text = "";
 
-    if (result) {
-      text = result.response.text();
+    if (completion) {
+      text = completion.choices[0]?.message?.content || "";
+
+// REMOVE markdown wrappers if AI adds them
+text = text
+  .replace(/```json/g, "")
+  .replace(/```/g, "")
+  .trim();
     }
 
     let parsed;
@@ -29,7 +67,6 @@ export async function POST(req) {
     try {
       parsed = JSON.parse(text);
     } catch {
-      // ✅ FALLBACK WEBSITE (IMPORTANT)
       parsed = {
         files: {
           "/src/App.js": {
@@ -38,21 +75,40 @@ import React from "react";
 
 export default function App() {
   return (
-    <div style={{padding:40,fontFamily:"sans-serif"}}>
-      <h1>🚀 AI Generated App</h1>
-      <p>This is a fallback demo because AI server was busy.</p>
+    <div style={{
+      minHeight:"100vh",
+      display:"flex",
+      flexDirection:"column",
+      alignItems:"center",
+      justifyContent:"center",
+      background:"#0f172a",
+      color:"white",
+      fontFamily:"sans-serif"
+    }}>
+      <h1 style={{
+        fontSize:"48px",
+        marginBottom:"10px"
+      }}>
+        WebForge AI
+      </h1>
 
-      <div style={{marginTop:20}}>
-        <button style={{
-          padding:"10px 20px",
-          background:"#3b82f6",
-          color:"#fff",
-          border:"none",
-          borderRadius:"8px"
-        }}>
-          Click Me
-        </button>
-      </div>
+      <p style={{
+        opacity:0.8,
+        marginBottom:"20px"
+      }}>
+        AI generation fallback demo
+      </p>
+
+      <button style={{
+        padding:"12px 24px",
+        background:"#3b82f6",
+        border:"none",
+        color:"white",
+        borderRadius:"10px",
+        cursor:"pointer"
+      }}>
+        Generated Successfully
+      </button>
     </div>
   );
 }
@@ -71,8 +127,15 @@ export default function App() {
       files: {
         "/src/App.js": {
           code: `
-export default function App(){
-  return <h1 style={{padding:20}}>Something went wrong</h1>
+export default function App() {
+  return (
+    <div style={{
+      padding:40,
+      fontFamily:"sans-serif"
+    }}>
+      <h1>Something went wrong</h1>
+    </div>
+  );
 }
           `,
         },
