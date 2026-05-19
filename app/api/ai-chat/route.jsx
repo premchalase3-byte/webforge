@@ -10,26 +10,21 @@ export async function POST(req) {
 
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
+
       temperature: 0.7,
+
       max_tokens: 1024,
-      stream: true,
+
       messages: [
         {
           role: "system",
           content: `
 You are WebForge AI assistant.
 
-Behave like a friendly senior developer.
-
-Keep responses:
-- short
-- human
-- helpful
-- conversational
-
-Do NOT use markdown code blocks unless necessary.
-          `,
+Keep responses short, helpful, and professional.
+`,
         },
+
         {
           role: "user",
           content: prompt,
@@ -37,73 +32,23 @@ Do NOT use markdown code blocks unless necessary.
       ],
     });
 
-    const encoder = new TextEncoder();
+    const text =
+      completion?.choices?.[0]?.message?.content ||
+      "AI response failed";
 
-    const stream = new ReadableStream({
-      async start(controller) {
-        try {
-          let fullText = "";
-
-          for await (const chunk of completion) {
-            const chunkText =
-              chunk.choices?.[0]?.delta?.content || "";
-
-            if (!chunkText) continue;
-
-            fullText += chunkText;
-
-            controller.enqueue(
-              encoder.encode(
-                `data: ${JSON.stringify({
-                  chunk: chunkText,
-                })}\n\n`
-              )
-            );
-          }
-
-          controller.enqueue(
-            encoder.encode(
-              `data: ${JSON.stringify({
-                result: fullText,
-                done: true,
-              })}\n\n`
-            )
-          );
-
-          controller.close();
-        } catch (e) {
-          controller.enqueue(
-            encoder.encode(
-              `data: ${JSON.stringify({
-                error: e.message || "AI chat failed",
-              })}\n\n`
-            )
-          );
-
-          controller.close();
-        }
-      },
+    return Response.json({
+      result: text,
     });
 
-    return new Response(stream, {
-      headers: {
-        "Content-Type": "text/event-stream",
-        "Cache-Control": "no-cache",
-        Connection: "keep-alive",
-      },
-    });
-  } catch (e) {
-    console.error("CHAT ERROR:", e);
+  } catch (error) {
+    console.error("CHAT ERROR:", error);
 
-    return new Response(
-      JSON.stringify({
-        error: e.message || "AI chat failed",
-      }),
+    return Response.json(
+      {
+        error: "AI chat failed",
+      },
       {
         status: 500,
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
   }
