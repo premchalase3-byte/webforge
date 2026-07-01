@@ -17,7 +17,6 @@ import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
 
 import { useBot } from "@/components/mascot/BotContext";
-import { ThreeDPhotoCarousel } from "@/components/ui/3d-carousel";
 
 import ImageUpload from "./ImageUpload";
 
@@ -164,186 +163,88 @@ const analyzeScreenshot = async () => {
 
     updateMood("idle");
   }
-};
-  return (
-    <div className="min-h-screen bg-gray-950 relative overflow-hidden">
+};return (
+  <div className="min-h-screen bg-gray-950 relative overflow-hidden">
 
-      {/* Background */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]">
-
-        <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 bg-[radial-gradient(circle_400px_at_50%_300px,#3b82f625,transparent)]" />
-
-      </div>
-
-      <div className="container mx-auto px-4 py-14 relative z-10">
-
-        <div className="flex flex-col items-center space-y-10">
-
-          {/* HEADER */}
-          <div className="text-center space-y-5">
-
-            <div className="inline-flex items-center space-x-2 bg-blue-500/10 backdrop-blur-md rounded-full px-6 py-3 border border-blue-400/20 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
-
-              <Sparkles className="h-6 w-6 text-blue-400" />
-
-              <span className="text-blue-400 text-lg font-semibold">
-                NEXT-GEN AI WEBSITE BUILDER
-              </span>
-
-            </div>
-
-            <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-[linear-gradient(45deg,#60a5fa_30%,#ec4899)] leading-tight">
-
-              FORGE the Impossible
-
-              <br className="hidden md:block" />
-
-              with WebForge
-
-            </h1>
-
-            <p className="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto font-mono">
-
-              Describe a website idea and WebForge will generate the full project instantly.
-
-            </p>
-
-          </div>
-
-          {/* INPUT */}
-          <div className="w-full max-w-3xl bg-white/5 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_60px_rgba(59,130,246,0.25)] transition">
-
-            <div className="p-6">
-
-              <div className="flex gap-4">
-
-                <textarea
-                  placeholder="Describe the website you want to build..."
-                  value={userInput}
-                  onChange={(e) => {
-                    setUserInput(e.target.value);
-
-                    updateMood("curious");
-                  }}
-                  disabled={isEnhancing}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl p-5 text-gray-100 placeholder-gray-400 focus:border-blue-400 outline-none font-mono text-lg h-40 resize-none backdrop-blur-md"
-                />
-
-                <div className="flex flex-col gap-3">
-
-                  {userInput && (
-                    <>
-                      <button
-                        onClick={enhancePrompt}
-                        className="bg-gradient-to-r from-emerald-500 to-teal-500 p-4 rounded-xl hover:scale-105 transition shadow-lg"
-                      >
-
-                        {isEnhancing ? (
-                          <Loader2 className="animate-spin" />
-                        ) : (
-                          <Wand2 />
-                        )}
-
-                      </button>
-
-                      <button
-                        onClick={() => onGenerate(userInput)}
-                        className="bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-xl hover:scale-105 transition shadow-lg"
-                      >
-
-                        <Send />
-
-                      </button>
-                    </>
-                  )}
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* SUGGESTIONS */}
-          <div className="w-full max-w-6xl">
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-              {Lookup?.SUGGSTIONS?.map((suggestion, index) => (
-                <button
-                  key={index}
-                  onClick={() => onSuggestionClick(suggestion)}
-                  className="p-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl text-left hover:bg-white/10 hover:scale-[1.02] transition shadow-[0_0_20px_rgba(0,0,0,0.3)]"
-                >
-
-                  {suggestion}
-
-                </button>
-              ))}
-
-            </div>
-
-          </div>
-
-          {/* SCREENSHOT UPLOAD */}
-          <div className="w-full max-w-5xl mt-4">
-
-            <div className="text-center mb-6">
-
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-3">
-
-                Build Websites From Screenshots
-
-              </h2>
-
-              <p className="text-gray-400 max-w-2xl mx-auto">
-
-                Upload a screenshot of any website design and let WebForge AI recreate it into a fully functional React application instantly.
-
-              </p>
-
-            </div>
-
-            <div className="space-y-5">
-
-  <ImageUpload onImageSelect={setUploadedImage} />
-
-  {uploadedImage && (
-
-    <div className="flex justify-center">
-
-      <button
-        onClick={analyzeScreenshot}
-        className="px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 text-white font-semibold shadow-[0_0_40px_rgba(59,130,246,0.35)] hover:scale-105 transition-all duration-300"
-      >
-        Generate Website From Screenshot
-      </button>
-
+    {/* Background */}
+    <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]">
+      <div className="absolute left-1/2 top-0 h-[500px] w-[1000px] -translate-x-1/2 bg-[radial-gradient(circle_400px_at_50%_300px,#3b82f625,transparent)]" />
     </div>
 
-  )}
+    <div className="container mx-auto px-4 py-14 relative z-10">
 
-</div>
+      <div className="flex flex-col items-center space-y-10">
+
+        {/* HEADER */}
+        <div className="text-center space-y-5">
+
+          <div className="inline-flex items-center space-x-2 bg-blue-500/10 backdrop-blur-md rounded-full px-6 py-3 border border-blue-400/20 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+
+            <Sparkles className="h-6 w-6 text-blue-400" />
+
+            <span className="text-blue-400 text-lg font-semibold">
+              NEXT-GEN AI WEBSITE BUILDER
+            </span>
 
           </div>
 
-          {/* CAROUSEL */}
-          <div className="mt-2 w-full flex flex-col items-center">
+          <h1 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-[linear-gradient(45deg,#60a5fa_30%,#ec4899)] leading-tight">
 
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-2 text-center">
+            FORGE the Impossible
 
-              Explore Generated Websites
+            <br className="hidden md:block" />
 
-            </h2>
+            with WebForge
 
-            <div className="relative w-full max-w-6xl flex justify-center -mt-4">
+          </h1>
 
-              <div className="absolute w-[70%] h-[200px] bg-blue-500/20 blur-3xl rounded-full opacity-40"></div>
+          <p className="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto font-mono">
+            Describe a website idea and WebForge will generate the full project instantly.
+          </p>
 
-              <div className="relative w-full">
+        </div>
 
-                <ThreeDPhotoCarousel />
+        {/* INPUT */}
+        <div className="w-full max-w-3xl bg-white/5 backdrop-blur-2xl rounded-2xl border border-white/10 shadow-[0_8px_40px_rgba(0,0,0,0.4)] hover:shadow-[0_8px_60px_rgba(59,130,246,0.25)] transition">
+
+          <div className="p-6">
+
+            <div className="flex gap-4">
+
+              <textarea
+                placeholder="Describe the website you want to build..."
+                value={userInput}
+                onChange={(e) => {
+                  setUserInput(e.target.value);
+                  updateMood("curious");
+                }}
+                disabled={isEnhancing}
+                className="w-full bg-white/5 border border-white/10 rounded-xl p-5 text-gray-100 placeholder-gray-400 focus:border-blue-400 outline-none font-mono text-lg h-40 resize-none backdrop-blur-md"
+              />
+
+              <div className="flex flex-col gap-3">
+
+                {userInput && (
+                  <>
+                    <button
+                      onClick={enhancePrompt}
+                      className="bg-gradient-to-r from-emerald-500 to-teal-500 p-4 rounded-xl hover:scale-105 transition shadow-lg"
+                    >
+                      {isEnhancing ? (
+                        <Loader2 className="animate-spin" />
+                      ) : (
+                        <Wand2 />
+                      )}
+                    </button>
+
+                    <button
+                      onClick={() => onGenerate(userInput)}
+                      className="bg-gradient-to-r from-blue-500 to-purple-500 p-4 rounded-xl hover:scale-105 transition shadow-lg"
+                    >
+                      <Send />
+                    </button>
+                  </>
+                )}
 
               </div>
 
@@ -353,10 +254,71 @@ const analyzeScreenshot = async () => {
 
         </div>
 
+        {/* SUGGESTIONS */}
+        <div className="w-full max-w-6xl">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+            {Lookup?.SUGGSTIONS?.map((suggestion, index) => (
+
+              <button
+                key={index}
+                onClick={() => onSuggestionClick(suggestion)}
+                className="p-5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl text-left hover:bg-white/10 hover:scale-[1.02] transition shadow-[0_0_20px_rgba(0,0,0,0.3)]"
+              >
+                {suggestion}
+              </button>
+
+            ))}
+
+          </div>
+
+        </div>
+
+        {/* SCREENSHOT UPLOAD */}
+        <div className="w-full max-w-5xl mt-4">
+
+          <div className="text-center mb-6">
+
+            <h2 className="text-3xl md:text-5xl font-bold text-white mb-3">
+              Build Websites From Screenshots
+            </h2>
+
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Upload a screenshot of any website design and let WebForge AI recreate it into a fully functional React application instantly.
+            </p>
+
+          </div>
+
+          <div className="space-y-5">
+
+            <ImageUpload onImageSelect={setUploadedImage} />
+
+            {uploadedImage && (
+
+              <div className="flex justify-center">
+
+                <button
+                  onClick={analyzeScreenshot}
+                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 via-cyan-500 to-purple-500 text-white font-semibold shadow-[0_0_40px_rgba(59,130,246,0.35)] hover:scale-105 transition-all duration-300"
+                >
+                  Generate Website From Screenshot
+                </button>
+
+              </div>
+
+            )}
+
+          </div>
+
+        </div>
+
       </div>
 
     </div>
-  );
+
+  </div>
+);
 }
 
 export default Hero;
