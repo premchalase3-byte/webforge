@@ -1,12 +1,14 @@
 import {
-  Users,
+  User,
   Target,
   Eye,
   Rocket,
-  GraduationCap,
   Code2,
   Cpu,
   ShieldCheck,
+  Phone,
+  Github,
+  Globe,
 } from "lucide-react";
 
 export default function AboutPage() {
@@ -39,31 +41,29 @@ export default function AboutPage() {
 
           <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cyan-500/10 border border-cyan-400/20 backdrop-blur-xl">
 
-            <Users className="text-cyan-400 h-5 w-5" />
+            <User className="text-cyan-400 h-5 w-5" />
 
             <span className="text-cyan-300 font-semibold">
-
-              About Us
-
+              About Me
             </span>
 
           </div>
 
           <h1 className="mt-8 text-6xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
 
-            Passionate Developers.
+            Passionate AI Developer.
             <br />
-            Intelligent Solutions.
+            Building Intelligent Solutions.
 
           </h1>
 
           <p className="mt-8 text-xl text-gray-300 max-w-4xl mx-auto leading-9">
 
-            We are passionate software developers dedicated to building
-            innovative AI-powered applications that simplify website
-            development. WebForge was created as an intelligent platform
-            capable of transforming simple ideas and screenshots into
-            complete, responsive web applications within seconds.
+            Hello! I'm <span className="text-cyan-400 font-semibold">Prem Chalase</span>,
+            a passionate Full Stack Developer with a strong interest in
+            Artificial Intelligence, Web Development, and modern software
+            engineering. I enjoy creating innovative applications that solve
+            real-world problems using the latest technologies.
 
           </p>
 
@@ -78,17 +78,14 @@ export default function AboutPage() {
             <Target className="text-cyan-400 h-10 w-10 mb-6" />
 
             <h2 className="text-3xl font-bold mb-5">
-
-              Our Mission
-
+              My Mission
             </h2>
 
             <p className="text-gray-300 leading-8">
 
-              Our mission is to make website development accessible,
-              faster and more efficient using Artificial Intelligence.
-              We aim to reduce development time while maintaining
-              high-quality modern web experiences.
+              My mission is to leverage Artificial Intelligence to simplify
+              software development and build tools that enable users to create
+              high-quality applications faster and more efficiently.
 
             </p>
 
@@ -99,16 +96,14 @@ export default function AboutPage() {
             <Eye className="text-blue-400 h-10 w-10 mb-6" />
 
             <h2 className="text-3xl font-bold mb-5">
-
-              Our Vision
-
+              My Vision
             </h2>
 
             <p className="text-gray-300 leading-8">
 
-              To become a next-generation AI development platform where
-              anyone can build beautiful, responsive and production-ready
-              websites without requiring advanced programming knowledge.
+              I aspire to become a skilled AI and Full Stack Developer,
+              building impactful software solutions that combine innovation,
+              automation, and excellent user experiences.
 
             </p>
 
@@ -123,153 +118,148 @@ export default function AboutPage() {
           <Rocket className="text-purple-400 h-10 w-10 mb-6" />
 
           <h2 className="text-4xl font-bold mb-6">
-
-            Our Journey
-
+            My Journey
           </h2>
 
           <p className="text-gray-300 leading-9 text-lg">
 
-            WebForge started as an academic project with the objective of
-            exploring Generative AI in modern web development.
-            Throughout development, several advanced features were
-            implemented including AI Website Generation, Screenshot-to-Code,
-            Prompt Enhancement, Live Preview, Authentication, and Project
-            Download capabilities.
+            WebForge was developed as my major academic project to explore the
+            capabilities of Generative AI in website development. I independently
+            designed and implemented the application's architecture, integrated
+            AI models using the Groq API, developed secure authentication with
+            Clerk, connected the Convex database, implemented Screenshot-to-Code,
+            Prompt Enhancement, Live Preview using Sandpack, multi-page website
+            generation, responsive UI, and project download functionality.
 
-            The project continuously evolves as new AI technologies become
-            available.
+            This project reflects my passion for AI-powered software development
+            and my commitment to learning modern technologies.
 
           </p>
 
         </div>
 
-        
-        {/* Team */}
+        {/* Developer */}
 
-<div className="mt-24">
+        <div className="mt-24">
 
-  <div className="text-center mb-12">
+          <div className="text-center mb-12">
 
-    <h2 className="text-5xl font-bold">
-      Meet Our Team
-    </h2>
+            <h2 className="text-5xl font-bold">
+              Developer
+            </h2>
 
-    <p className="text-gray-400 mt-4 text-lg">
-      The minds behind WebForge
-    </p>
+          </div>
 
-  </div>
+          <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-3xl border border-white/10 rounded-3xl p-10">
 
-  <div className="grid lg:grid-cols-2 gap-8">
+            <div className="w-24 h-24 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center text-4xl font-bold mb-6">
+              P
+            </div>
 
-    {/* Prem */}
+            <h3 className="text-4xl font-bold">
+              Prem Chalase
+            </h3>
 
-    <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-3xl border border-white/10 rounded-3xl p-10">
+            <span className="inline-block mt-4 px-5 py-2 rounded-full bg-cyan-500/20 text-cyan-300">
+              Full Stack AI Developer
+            </span>
 
-      <div className="w-20 h-20 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center text-3xl font-bold mb-6">
-        P
-      </div>
+            <p className="mt-8 text-gray-300 leading-8 text-lg">
 
-      <h3 className="text-3xl font-bold">
-        Prem Chalase
-      </h3>
+              I designed and developed WebForge from end to end, including
+              frontend development, backend integration, AI-powered code
+              generation, authentication, database management, prompt
+              enhancement, screenshot analysis, responsive design, live code
+              preview, and deployment.
 
-      <span className="inline-block mt-3 px-4 py-2 rounded-full bg-cyan-500/20 text-cyan-300">
-        Major Developer • AI & Full Stack
-      </span>
+            </p>
 
-      <p className="mt-6 text-gray-300 leading-8">
-        Responsible for the overall architecture, AI integration,
-        backend development, authentication, Convex database,
-        Groq integration, screenshot-to-code pipeline,
-        prompt enhancement, multi-page generation,
-        live preview system and deployment.
-      </p>
+          </div>
 
-    </div>
+        </div>
+        {/* Contact */}
 
-    {/* Nagalaxmi */}
+        <div className="mt-24 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-3xl p-10">
 
-    <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-3xl border border-white/10 rounded-3xl p-10">
+          <h2 className="text-4xl font-bold mb-10 text-center">
+            Contact Information
+          </h2>
 
-      <div className="w-20 h-20 rounded-full bg-gradient-to-r from-pink-400 to-purple-500 flex items-center justify-center text-3xl font-bold mb-6">
-        N
-      </div>
+          <div className="space-y-8">
 
-      <h3 className="text-3xl font-bold">
-        Nagalaxmi Katta
-      </h3>
+            <div className="flex items-center gap-4">
 
-      <span className="inline-block mt-3 px-4 py-2 rounded-full bg-purple-500/20 text-purple-300">
-        UI  Developer
-      </span>
+              <div className="p-3 rounded-xl bg-cyan-500/10">
+                <Phone className="text-cyan-400 h-6 w-6" />
+              </div>
 
-      <p className="mt-6 text-gray-300 leading-8">
-        Responsible for designing intuitive user interfaces,
-        improving user experience, implementing modern layouts,
-        glassmorphism-inspired styling, responsive design,
-        and ensuring a visually appealing experience
-        throughout the application.
-      </p>
+              <div>
+                <p className="text-cyan-400 font-semibold">
+                  Contact Number
+                </p>
 
-    </div>
+                <p className="text-gray-300 text-lg">
+                  7760973219
+                </p>
+              </div>
 
-  </div>
+            </div>
 
-</div>
+            <div className="flex items-center gap-4">
 
-{/* Contact */}
+              <div className="p-3 rounded-xl bg-cyan-500/10">
+                <Github className="text-cyan-400 h-6 w-6" />
+              </div>
 
-<div className="mt-24 bg-white/5 backdrop-blur-3xl border border-white/10 rounded-3xl p-10">
+              <div>
 
-  <h2 className="text-4xl font-bold mb-8 text-center">
-    Contact Information
-  </h2>
+                <p className="text-cyan-400 font-semibold">
+                  GitHub
+                </p>
 
-  <div className="space-y-5 text-lg">
+                <a
+                  href="https://github.com/premchalase3-byte"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-cyan-300 transition"
+                >
+                  github.com/premchalase3-byte
+                </a>
 
-    <div>
-      <span className="font-semibold text-cyan-400">
-        Contact Number:
-      </span>
-      <p className="text-gray-300">
-        7760973219
-      </p>
-    </div>
+              </div>
 
-    <div>
-      <span className="font-semibold text-cyan-400">
-        GitHub:
-      </span>
-      <a
-        href="https://github.com/premchalase3-byte"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block text-blue-400 hover:text-cyan-300 transition"
-      >
-        github.com/premchalase3-byte
-      </a>
-    </div>
+            </div>
 
-    <div>
-      <span className="font-semibold text-cyan-400">
-        Portfolio:
-      </span>
-      <a
-        href="https://prems-portfolio-eight.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block text-blue-400 hover:text-cyan-300 transition"
-      >
-        prems-portfolio-eight.vercel.app
-      </a>
-    </div>
+            <div className="flex items-center gap-4">
 
-  </div>
+              <div className="p-3 rounded-xl bg-cyan-500/10">
+                <Globe className="text-cyan-400 h-6 w-6" />
+              </div>
 
-</div>
-        {/* Technology */}
+              <div>
+
+                <p className="text-cyan-400 font-semibold">
+                  Portfolio
+                </p>
+
+                <a
+                  href="https://prems-portfolio-eight.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-cyan-300 transition"
+                >
+                  prems-portfolio-eight.vercel.app
+                </a>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        {/* Technologies */}
 
         <div className="mt-24">
 
@@ -278,9 +268,7 @@ export default function AboutPage() {
             <Cpu className="text-cyan-400 h-9 w-9" />
 
             <h2 className="text-5xl font-bold">
-
-              Technologies We Use
-
+              Technologies I Used
             </h2>
 
           </div>
@@ -313,16 +301,16 @@ export default function AboutPage() {
           <ShieldCheck className="mx-auto h-12 w-12 text-cyan-400 mb-5" />
 
           <h2 className="text-4xl font-bold">
-
             Thank You for Visiting
-
           </h2>
 
-          <p className="mt-6 text-gray-400 max-w-3xl mx-auto text-lg">
+          <p className="mt-6 text-gray-400 max-w-3xl mx-auto text-lg leading-8">
 
-            We believe Artificial Intelligence is transforming software
-            development, and WebForge is our contribution towards that
-            future. Thank you for exploring our project.
+            Thank you for taking the time to learn about me and my project.
+            WebForge represents my passion for Artificial Intelligence,
+            Full Stack Development, and creating innovative software
+            solutions. I look forward to building even more impactful
+            applications in the future.
 
           </p>
 

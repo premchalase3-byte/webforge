@@ -77,7 +77,7 @@ function Header() {
             >
               <Info className="h-4 w-4 text-cyan-400" />
               <span className="text-white text-sm font-medium">
-                About Us
+                About Me
               </span>
             </Link>
 
