@@ -24,13 +24,11 @@ export const metadata = {
     "Groq AI",
     "Artificial Intelligence",
     "WebForge",
-    "AI Coding Assistant"
+    "AI Coding Assistant",
   ],
 
   authors: [{ name: "Prem Chalase" }],
-
   creator: "Prem Chalase",
-
   publisher: "WebForge",
 
   robots: {
@@ -43,14 +41,38 @@ export const metadata = {
     description:
       "Generate complete React websites from prompts or screenshots using AI.",
     type: "website",
+    url: "https://webforge-brown.vercel.app",
     siteName: "WebForge",
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "WebForge",
+    title: "WebForge | AI Website Builder",
     description:
       "AI-powered Website Builder using React, Next.js and Groq AI.",
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "WebForge",
+  url: "https://webforge-brown.vercel.app",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Web",
+  description:
+    "AI-powered website builder that generates responsive React websites from prompts and screenshots.",
+  creator: {
+    "@type": "Person",
+    name: "Prem Chalase",
+  },
+  author: {
+    "@type": "Person",
+    name: "Prem Chalase",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "WebForge",
   },
 };
 
@@ -59,53 +81,40 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body>
-
           {/* Microsoft Clarity */}
           <Script id="microsoft-clarity" strategy="afterInteractive">
             {`
               (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);
-                  t.async=1;
-                  t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];
-                  y.parentNode.insertBefore(t,y);
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);
+                t.async=1;
+                t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];
+                y.parentNode.insertBefore(t,y);
               })(window, document, "clarity", "script", "xg6yh69tw8");
             `}
           </Script>
+
+          {/* Schema.org JSON-LD */}
+          <Script
+            id="schema-org"
+            type="application/ld+json"
+            strategy="afterInteractive"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(jsonLd),
+            }}
+          />
 
           <ConvexClientProvider>
             <Provider>
               <MessagesContextProvider>
                 <BotProvider>
-
                   {children}
-
                   <WebForgeBot />
-
                 </BotProvider>
               </MessagesContextProvider>
             </Provider>
           </ConvexClientProvider>
-          <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      name: "WebForge",
-      applicationCategory: "DeveloperApplication",
-      operatingSystem: "Web",
-      creator: {
-        "@type": "Person",
-        name: "Prem Chalase",
-      },
-      description:
-        "AI-powered website builder that generates responsive React websites from prompts and screenshots.",
-    }),
-  }}
-/>
-
         </body>
       </html>
     </ClerkProvider>
