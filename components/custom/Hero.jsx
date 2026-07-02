@@ -199,7 +199,7 @@ const analyzeScreenshot = async () => {
           </h1>
 
           <p className="text-lg md:text-xl text-cyan-300 max-w-3xl mx-auto font-mono">
-            Describe a website idea and WebForge will generate the full project instantly.
+            Generate responsive React websites from text prompts or screenshots using AI. WebForge creates modern, production-ready websites with Next.js and Tailwind CSS in seconds.
           </p>
 
         </div>
