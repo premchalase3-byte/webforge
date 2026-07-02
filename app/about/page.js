@@ -144,35 +144,7 @@ export default function AboutPage() {
 
         </div>
 
-        {/* Developer */}
-
-        <div className="mt-24 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 backdrop-blur-3xl border border-white/10 rounded-3xl p-10">
-
-          <GraduationCap className="text-cyan-400 h-10 w-10 mb-6" />
-
-          <h2 className="text-4xl font-bold mb-4">
-
-            Developed By
-
-          </h2>
-
-          <h3 className="text-2xl font-semibold text-cyan-300">
-
-            Prem
-
-          </h3>
-
-          <p className="mt-4 text-gray-300 leading-8">
-
-            Student Developer passionate about Artificial Intelligence,
-            Full Stack Web Development and modern UI/UX design.
-            WebForge reflects the combination of AI technologies and
-            modern frontend engineering to create intelligent software
-            solutions.
-
-          </p>
-
-        </div>
+        
         {/* Team */}
 
 <div className="mt-24">
